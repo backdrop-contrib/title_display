@@ -1,0 +1,9 @@
+type = module
+name = Title Display
+description = Enables moving the title field within display modes.
+backdrop = 1.x
+
+package = Fields
+tags[] = Administration
+tags[] = Content
+tags[] = Structure

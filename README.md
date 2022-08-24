@@ -1,105 +1,62 @@
-MyModule
-========
-<!--
-The first paragraph of this file should be kept short as it will be used as the
-project summary on BackdropCMS.org. Aim for about 240 characters (three lines at
-80 characters each).
+Title Display
+=============
 
-All lines in this file should be no more than 80 characters long for legibility,
-unless including a URL or example that requires the line to not wrap.
-|<- - - - - - - This line is exactly 80 characters for reference - - - - - - ->|
+The Title Display module allows you to render the title of a node as part of the
+content area. The title can then be placed between other fields instead of being
+positioned at the top of the content.
 
-Detail in READMEs should be limited to the minimum required for installation and
-getting started. More detailed documentation should be moved to a GitHub wiki
-page; for example: https://github.com/backdrop-contrib/setup/wiki/Documentation.
--->
+Settings for how the title is displayed is done per content type and display
+mode, with options for configuring the HTML tag (H2, H3, etc.) and extra classes
+that might be desired.
 
-MyModule enables you to...
+Note that when enabled on a content type, the title may display twice: once
+at the top of the content and once within the content. The display of the title
+can be suppressed by Views, Layout, or whatever module is rendering the
+content.
 
+Potential Conflicts
+-------------------
+This module potentially **conflicts** with the "Title" module and the
+"Display Suite" collection of modules. It should not be used at the same time
+as those other modules.
 
-Requirements
-------------
-<!--
-List any dependencies here. Remove this section if not needed.
--->
+This feature is also planned to be included in Backdrop core at some point in
+the future. See these two issues:
 
-This module requires that the following modules are also enabled:
+* [Issue #933 Make node title a proper (sortable too) field](https://github.com/backdrop/backdrop-issues/issues/933)
+* [Issue #1950 Move title display settings to Manage Display form](https://github.com/backdrop/backdrop-issues/issues/1950)
 
-- [Example module](https://github.com/backdrop-contrib/example_module)
-- [Dummy library](https://github.com/backdrop-contrib/dummy_library)
-
+This module is intended to work as a light-weight solution until core provides
+the feature directly.
 
 Installation
 ------------
-<!--
-List the steps needed to install and configure the module. Add/remove steps as
-necessary.
--->
 
-- Install this module using the official Backdrop CMS instructions at
-  https://docs.backdropcms.org/documentation/extend-with-modules.
-
-- Visit the configuration page under Administration > Configuration > System >
-  MyModule (admin/config/system/mymodule) and enter the required information.
-
-- Additional steps go here...
-
-
-Documentation
--------------
-<!--
-Link to the repository's wiki if more documentation can be found there. Remove
-this section if not needed (and consider disabling the wiki in the repo settings
-if not used).
--->
-
-Additional documentation is located in the Wiki:
-https://github.com/backdrop-contrib/mymodule/wiki/Documentation.
-
-
-Issues
-------
-<!--
-Link to the repo's issue queue.
--->
-
-Bugs and Feature Requests should be reported in the Issue Queue:
-https://github.com/backdrop-contrib/mymodule/issues.
-
+1. Install this module using the official Backdrop CMS instructions at
+   <https://backdropcms.org/guide/modules>.
+2. Login as an administrator. Enable the module at "Administer" >
+   "Functionality" (`admin/modules`).
+3. Enable the title field for certain display modes for a given content type
+   such as at Administer > Structure > Content Types (`admin/structure/types`)
+   and click the "Configure" button for a content type. Settings for this
+   module are in a vertical tab labeled "Display title". Enable for one or more
+   display modes on the content type.
+4. Once enabled, switch to the "Manage Displays" tab of the content type. The
+   title field will now be available in enabled display modes.
 
 Current Maintainers
 -------------------
-<!--
-List the current maintainer(s) of the module, and note if this module needs
-new/additional maintainers.
--->
 
-- [Your Name](https://github.com/username)
-- Seeking additional maintainers
-
+- [Nate Lampton](https://github.com/quicksketch)
 
 Credits
 -------
-<!--
-Give credit where credit's due.
-If this is a Drupal port, state who ported it, and who wrote the original Drupal
-module. If this module is based on another project, or uses third-party
-libraries, list them here. You can also mention any organisations/companies who
-sponsored the module's development.
--->
 
-- Ported to Backdrop CMS by [Your Name](https://github.com/username).
-- Originally written for Drupal by [Someone Else](https://github.com/username).
-- Based on [Some Other project](https://github.com/example).
-- Sponsored by [An Organization](https://example.org).
-
+- Written for Backdrop CMS by [Nate Lampton](https://github.com/quicksketch).
+- Original development paid for by [Exceljet](https://exceljet.net/).
 
 License
 -------
-<!--
-Mention what license this module is released under, and where people can find
-it.
--->
 
 This project is GPL v2 software.
 See the LICENSE.txt file in this directory for complete text.
