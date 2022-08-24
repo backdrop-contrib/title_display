@@ -155,6 +155,11 @@ function title_display_form_node_type_form_submit(&$form, $form_state) {
  * Partial form for configuring a view mode's title display settings.
  */
 function _title_display_view_mode_form($settings) {
+  $subform['link'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Link title to content'),
+    '#default_value' => $settings['link'],
+  );
   $subform['tag'] = array(
     '#type' => 'select',
     '#title' => t('Title tag'),
@@ -205,6 +210,7 @@ function title_display_view_mode_form_submit(&$form, &$form_state) {
 
   $title_settings = $form_state['values']['title_display'];
   if ($title_settings['enable']) {
+    $all_view_modes[$entity_type][$view_mode]['link'] = (bool) $title_settings['link'];
     $all_view_modes[$entity_type][$view_mode]['tag'] = $title_settings['tag'];
     $all_view_modes[$entity_type][$view_mode]['class'] = $title_settings['class'];
   }
@@ -225,14 +231,19 @@ function title_display_view_mode_form_submit(&$form, &$form_state) {
  * Implements hook_entity_view().
  */
 function title_display_entity_view(Entity $entity, $entity_type, $view_mode, $language) {
-  $entity_type = $entity->entityType();
-  $settings = title_display_get_settings($entity_type, $view_mode);
+  $settings = title_display_get_settings($entity_type, $entity->bundle(), $view_mode);
 
   if ($settings['enabled']) {
     $tag = $settings['tag'];
     $attributes = backdrop_attributes(array('class' => explode(' ', $settings['class'])));
     $title_output = "<$tag$attributes>";
-    $title_output .= check_plain($entity->label());
+    if ($settings['link']) {
+      $uri = $entity->uri();
+      $title_output .= l($entity->label(), $uri['path'], $uri['options']);
+    }
+    else {
+      $title_output .= check_plain($entity->label());
+    }
     $title_output .= "</$tag>";
     $entity->content['title'] = array(
       '#markup' => $title_output,
@@ -279,6 +290,7 @@ function title_display_get_settings($entity_type, $bundle_name, $view_mode) {
   $all_view_modes = $config->get('view_modes');
   $defaults = array(
     'enabled' => FALSE,
+    'link' => TRUE,
     'tag' => 'h3',
     'class' => '',
   );
