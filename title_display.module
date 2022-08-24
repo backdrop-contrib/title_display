@@ -146,6 +146,9 @@ function title_display_form_node_type_form_submit(&$form, $form_state) {
   }
   $config->set("view_modes.node.$node_type", $view_mode_settings);
   $config->save();
+
+  module_load_include('inc', 'field', 'field.info');
+  field_info_cache_clear();
 }
 
 /**

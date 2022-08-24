@@ -23,10 +23,10 @@ as those other modules.
 This feature is also planned to be included in Backdrop core at some point in
 the future. See these two issues:
 
-* [Issue #933 Make node title a proper (sortable too) field](https://github.com/backdrop/backdrop-issues/issues/933)
-* [Issue #1950 Move title display settings to Manage Display form](https://github.com/backdrop/backdrop-issues/issues/1950)
+* [Issue #933: Make node title a proper (sortable too) field](https://github.com/backdrop/backdrop-issues/issues/933)
+* [Issue #1950: Move title display settings to Manage Display form](https://github.com/backdrop/backdrop-issues/issues/1950)
 
-This module is intended to work as a light-weight solution until core provides
+This module is intended to work as a lightweight solution until core provides
 the feature directly.
 
 Installation
@@ -36,11 +36,11 @@ Installation
    <https://backdropcms.org/guide/modules>.
 2. Login as an administrator. Enable the module at "Administer" >
    "Functionality" (`admin/modules`).
-3. Enable the title field for certain display modes for a given content type
-   such as at Administer > Structure > Content Types (`admin/structure/types`)
-   and click the "Configure" button for a content type. Settings for this
-   module are in a vertical tab labeled "Display title". Enable for one or more
-   display modes on the content type.
+3. Enable the title display for specific content types at Administer >
+   Structure > Content Types (`admin/structure/types`) and click the "Configure"
+   button for a content type. Settings for this module are in a vertical tab
+   labeled "Display title". Enable for one or more display modes on the content
+   type.
 4. Once enabled, switch to the "Manage Displays" tab of the content type. The
    title field will now be available in enabled display modes.
 
