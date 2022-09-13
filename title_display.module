@@ -139,6 +139,7 @@ function title_display_form_node_type_form_submit(&$form, $form_state) {
   $view_mode_settings = array();
   foreach ($enabled_view_modes as $view_mode) {
     $view_mode_settings[$view_mode] = array(
+      'link' => (bool) $title_display_values['view_modes'][$view_mode]['link'],
       'tag' => $title_display_values['view_modes'][$view_mode]['tag'],
       'class' => $title_display_values['view_modes'][$view_mode]['class'],
     );
@@ -198,35 +199,6 @@ function _title_display_class_validate($element, &$form, $form_state) {
 }
 
 /**
- * Additional submit handler for field_ui_view_mode_form().
- */
-function title_display_view_mode_form_submit(&$form, &$form_state) {
-  $entity_type = $form['#entity_type'];
-  $view_mode = $form_state['values']['machine_name'];
-
-  $config = config('title_display.settings');
-  $all_view_modes = $config->get('view_modes');
-
-  $title_settings = $form_state['values']['title_display'];
-  if ($title_settings['enable']) {
-    $all_view_modes[$entity_type][$view_mode]['link'] = (bool) $title_settings['link'];
-    $all_view_modes[$entity_type][$view_mode]['tag'] = $title_settings['tag'];
-    $all_view_modes[$entity_type][$view_mode]['class'] = $title_settings['class'];
-  }
-  else {
-    if (isset($all_view_modes[$entity_type][$view_mode])) {
-      unset($all_view_modes[$entity_type][$view_mode]);
-    }
-    // Clean up any entity type that has no remaining view modes.
-    if (empty($all_view_modes[$entity_type])) {
-      unset($all_view_modes[$entity_type]);
-    }
-  }
-  $config->set('view_modes', $all_view_modes);
-  $config->save();
-}
-
-/**
  * Implements hook_entity_view().
  */
 function title_display_entity_view(Entity $entity, $entity_type, $view_mode, $language) {
@@ -234,7 +206,11 @@ function title_display_entity_view(Entity $entity, $entity_type, $view_mode, $la
 
   if ($settings['enabled']) {
     $tag = $settings['tag'];
-    $attributes = backdrop_attributes(array('class' => explode(' ', $settings['class'])));
+    $attributes = array();
+    if (!empty($settings['class'])) {
+      $attributes['class'] = explode(' ', $settings['class']);
+    }
+    $attributes = backdrop_attributes($attributes);
     $title_output = "<$tag$attributes>";
     if ($settings['link']) {
       $uri = $entity->uri();
