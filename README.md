@@ -9,10 +9,8 @@ Settings for how the title is displayed is done per content type and display
 mode, with options for configuring the HTML tag (H2, H3, etc.) and extra classes
 that might be desired.
 
-Note that when enabled on a content type, the title may display twice: once
-at the top of the content and once within the content. The display of the title
-can be suppressed by Views, Layout, or whatever module is rendering the
-content.
+Note that when enabled on a display mode, the normal title displayed by the
+node template is suppressed to prevent the title from displaying twice.
 
 Potential Conflicts
 -------------------
