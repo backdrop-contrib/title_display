@@ -252,6 +252,16 @@ function title_display_entity_view(Entity $entity, $entity_type, $view_mode, $la
 }
 
 /**
+ * Implements hook_preprocess_entity().
+ */
+function title_display_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  if (title_display_check_enabled('node', $node->type)) {
+    $variables['title'] = NULL;
+  }
+}
+
+/**
  * Check if Title Display is enabled on a particular entity type and bundle.
  *
  * @param string $entity_type
