@@ -232,7 +232,8 @@ function title_display_entity_view(Entity $entity, $entity_type, $view_mode, $la
  */
 function title_display_preprocess_node(&$variables) {
   $node = $variables['node'];
-  if (title_display_check_enabled('node', $node->type)) {
+  $view_mode = $variables['view_mode'];
+  if (title_display_check_enabled('node', $node->type, $view_mode)) {
     $variables['title'] = NULL;
   }
 }
@@ -244,14 +245,16 @@ function title_display_preprocess_node(&$variables) {
  *   The entity type such as node, user, etc.
  * @param string $bundle_name
  *   The bundle name such as the content type (e.g. post, page).
+ * @param string $view_mode
+ *   The name of the view mode being checked.
  *
  * @return bool
  *   TRUE if enabled, FALSE if not.
  */
-function title_display_check_enabled($entity_type, $bundle_name) {
+function title_display_check_enabled($entity_type, $bundle_name, $view_mode) {
   $config = config('title_display.settings');
   $all_view_modes = $config->get('view_modes');
-  return isset($all_view_modes[$entity_type][$bundle_name]);
+  return isset($all_view_modes[$entity_type][$bundle_name][$view_mode]);
 }
 
 /**
