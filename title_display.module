@@ -177,7 +177,7 @@ function _title_display_view_mode_form($settings) {
     '#type' => 'textfield',
     '#title' => t('Title classes'),
     '#default_value' => $settings['class'],
-    '#description' => t('Additional classes to be added to the title tag. Separate multiple classes by spapces.'),
+    '#description' => t('Additional classes to be added to the title tag. Separate multiple classes by spaces.'),
     '#element_validate' => array('_title_display_class_validate'),
   );
 
