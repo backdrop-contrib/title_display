@@ -79,7 +79,9 @@ function title_display_form_node_type_form_alter(&$form, $form_state) {
 
     $entity_info = entity_get_info('node');
     $custom_view_modes = array_keys(field_view_mode_settings('node', $node_type));
-    $view_mode_options = array();
+    $view_mode_options = array(
+      'default' => t('Default'),
+    );
     foreach ($entity_info['view modes'] as $view_mode_name => $view_mode_info) {
       if (in_array($view_mode_name, $custom_view_modes)) {
         $view_mode_options[$view_mode_name] = $view_mode_info['label'];
